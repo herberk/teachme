@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: TeachMe
+        psr4_prefix: TeachMe
+        src_path: app
