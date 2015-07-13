@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - teachme@localhost" uuid="e781ad15-52f6-460e-adad-bf938d89c5a0">
+    <database-info product="MySQL" version="5.6.24" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="teachme"/>
+    <table name="migrations" schema="" catalog="teachme" type="TABLE">
+      <column name="migration" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="batch" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="password_resets" schema="" catalog="teachme" type="TABLE">
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="token" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <index name="password_resets_email_index" unique="false" columns="email"/>
+      <index name="password_resets_token_index" unique="false" columns="token"/>
+    </table>
+    <table name="ticket_comments" schema="" catalog="teachme" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="comment" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="link" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ticket_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="ticket_comments_ticket_id_foreign" columns="ticket_id" ref-table="tickets" ref-schema="" ref-catalog="teachme" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="ticket_comments_user_id_foreign" columns="user_id" ref-table="users" ref-schema="" ref-catalog="teachme" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <index name="ticket_comments_ticket_id_foreign" unique="false" columns="ticket_id"/>
+      <index name="ticket_comments_user_id_foreign" unique="false" columns="user_id"/>
+    </table>
+    <table name="ticket_votes" schema="" catalog="teachme" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ticket_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="ticket_votes_ticket_id_foreign" columns="ticket_id" ref-table="tickets" ref-schema="" ref-catalog="teachme" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="ticket_votes_user_id_foreign" columns="user_id" ref-table="users" ref-schema="" ref-catalog="teachme" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <index name="ticket_votes_ticket_id_foreign" unique="false" columns="ticket_id"/>
+      <index name="ticket_votes_user_id_foreign" unique="false" columns="user_id"/>
+    </table>
+    <table name="tickets" schema="" catalog="teachme" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="ENUM" precision="6" scale="0" nullable="false" jdbcType="1"/>
+      <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="tickets_user_id_foreign" columns="user_id" ref-table="users" ref-schema="" ref-catalog="teachme" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="ticket_comments_ticket_id_foreign" table="ticket_comments" schema="" catalog="teachme" columns="ticket_id"/>
+      <exported-key name="ticket_votes_ticket_id_foreign" table="ticket_votes" schema="" catalog="teachme" columns="ticket_id"/>
+      <index name="tickets_user_id_foreign" unique="false" columns="user_id"/>
+    </table>
+    <table name="users" schema="" catalog="teachme" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="remember_token" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="ticket_comments_user_id_foreign" table="ticket_comments" schema="" catalog="teachme" columns="user_id"/>
+      <exported-key name="ticket_votes_user_id_foreign" table="ticket_votes" schema="" catalog="teachme" columns="user_id"/>
+      <exported-key name="tickets_user_id_foreign" table="tickets" schema="" catalog="teachme" columns="user_id"/>
+      <index name="users_email_unique" unique="true" columns="email"/>
+    </table>
+  </data-source>
+</component>
